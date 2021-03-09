@@ -1,0 +1,8 @@
+.logo {
+    height: 32px;
+    margin: 16px;
+    background-size: 128px;
+    background-repeat: no-repeat;
+    /* background: rgba(255, 255, 255, 0.3); */
+    background-image: url('../asset/logo/logo.png');
+  }
