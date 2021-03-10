@@ -4040,7 +4040,8 @@ const DiagramComponent = (props: any)=>{
         graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
             canvas.style.left = "0px";
             canvas.style.top = "0px";
-        })   
+            graph.fit();
+        })         
         graph.on('resize', (event: any)=>{            
             graph.fit();
         })
