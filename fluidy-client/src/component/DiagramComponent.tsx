@@ -10,7 +10,8 @@ const DiagramComponent = (props: any)=>{
         }        
         let graph: any = null
         graph = cytoscape({
-            container: ref.current, // container to render in          
+            container: ref.current, // container to render in    
+            zoom : 1,      
             elements: [
                 // Nodes                
                 {"data":{"id":"master"}},
@@ -95,7 +96,8 @@ const DiagramComponent = (props: any)=>{
             cols: 5
           }	
           
-          });                  
+          });       
+          console.log(graph)           
 
         //fit layout
         graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
