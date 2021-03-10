@@ -3,7 +3,6 @@ import * as antd from 'antd'
 import * as icons from '@ant-design/icons';
 import './LayoutComponent.css';
 import DiagramComponent from './DiagramComponent'
-import CytoscapeComponent from 'react-cytoscapejs';
 
 const {Layout, Menu, Typography, Row, Col} = antd;
 const { 
@@ -52,7 +51,7 @@ const LayoutComponent = () => {
           <Header className="site-layout-background" style={{ padding: 0, backgroundColor: 'gray', height : '6.6vh'}}>
             <Text>Main App bar</Text>
           </Header>
-          <Content style={{ margin: '0 0px', height: "93.4vh"}}>        
+          <Content style={{ margin: '0 0px', border : "5px solid cyan", height: "93.4vh"}}>        
             {/* <Row style={{ padding: 0, backgroundColor: 'cyan', textAlign : "center"}}>
               <Col span={24}>
                 <Text>Tool Bar</Text>

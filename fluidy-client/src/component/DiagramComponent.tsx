@@ -11,9 +11,10 @@ const DiagramComponent = (props: any)=>{
         let graph: any = null
         graph = cytoscape({
             container: ref.current, // container to render in    
-            zoom : 1,      
+            zoom : 1,
             elements: [
-                // Nodes                
+                // Nodes
+                
                 {"data":{"id":"master"}},
                 {"data":{"id":"masterFoo","parent":"master"}},
                 {"data":{"id":"masterComp","parent":"master"}},
@@ -66,39 +67,74 @@ const DiagramComponent = (props: any)=>{
                 {"data":{"id":"w16","source":"volume","target":"masterComp"}},
                 {"data":{"id":"w17","source":"mod1Out","target":"filter1"}},
                 {"data":{"id":"w18","source":"mod1Out","target":"filter2"}},
-                {"data":{"id":"w19","source":"mod2Out","target":"envelope"}},                
+                {"data":{"id":"w19","source":"mod2Out","target":"envelope"}},
+                // {"data":{"id":"w20","source":"","target":""}},
+                
+                // {"data":{"id":"e3","source":"n0:n2","target":"n0:n5"}},
+                // {"data":{"id":"e4","source":"n2:n1","target":"n2:n4"}},
+                // {"data":{"id":"e5","source":"n0:n3","target":"n0:n4"}},
+                // {"data":{"id":"e6","source":"n3","target":"n2"}},
+                // {"data":{"id":"e7","source":"n5","target":"n6"}},
+                // {"data":{"id":"e8","source":"n5","target":"n2"}},
+                // {"data":{"id":"e9","source":"n3:n3","target":"n3:n2"}},
+                // {"data":{"id":"e11","source":"n0:n0","target":"n0:n1"}},
+                // {"data":{"id":"e12","source":"n0:n3","target":"n0:n2"}},
+                // {"data":{"id":"e13","source":"n3:n6","target":"n3:n0"}},
+                // {"data":{"id":"e14","source":"n3:n4","target":"n3:n2"}},
+                // {"data":{"id":"e15","source":"n3:n3","target":"n2:n0"}},
+                // {"data":{"id":"e16","source":"n2:n4","target":"n2:n7"}},
+                // {"data":{"id":"e17","source":"n3:n7","target":"n3:n3"}},
+                // {"data":{"id":"e18","source":"n3:n2","target":"n3:n0"}},
+                // {"data":{"id":"e19","source":"n6","target":"n4"}},
+                // {"data":{"id":"e20","source":"n4","target":"n3"}},
+                // {"data":{"id":"e23","source":"n0","target":"n7"}},
+                // {"data":{"id":"e24","source":"n0:n3","target":"n0:n5"}},
+                // {"data":{"id":"e28","source":"n0:n0","target":"n0:n2"}},
+                // {"data":{"id":"e30","source":"n0:n0","target":"n0:n3"}},
+                // {"data":{"id":"e33","source":"n7","target":"n3"}},
+                // {"data":{"id":"e34","source":"n3:n1","target":"n3:n7"}},
+                // {"data":{"id":"e36","source":"n0:n3","target":"n0:n1"}},
+                // {"data":{"id":"e39","source":"n3:n0","target":"n3:n4"}},
+                // {"data":{"id":"e41","source":"n2:n0","target":"n2:n4"}},
+                // {"data":{"id":"e43","source":"n3:n0","target":"n3:n5"}},
+                // {"data":{"id":"e45","source":"n7","target":"n4"}},
+                // {"data":{"id":"e46","source":"n2:n7","target":"n2:n0"}},
+                // {"data":{"id":"e47","source":"n2:n1","target":"n3:n6"}},
+                // {"data":{"id":"e49","source":"n3:n6","target":"n3:n5"}},
+                // {"data":{"id":"e1","source":"n3:n7","target":"n1:n4"}},
+                // {"data":{"id":"e2","source":"n0:n0","target":"n1:n4"}},
+                // {"data":{"id":"e10","source":"n1:n5","target":"n1:n4"}}
             ],
             
-          style: [ // the stylesheet for the graph
-            {
-              selector: 'node',
-              style: {
-                // 'background-color': '#666',
-                'label': 'data(id)'
-              }
-            },
+            style: [ // the stylesheet for the graph
+                {
+                    selector: 'node',
+                    style: {
+                        // 'background-color': '#666',
+                        'label': 'data(id)'
+                    }
+                },
+                {
+                selector: 'edge',
+                    style: {
+                                'curve-style': "bezier",
+                        'width': 4,
+                        'line-color': '#ccc',
+                        'target-arrow-color': '#ccc',
+                        'target-arrow-shape': 'triangle'
+                    }
+                }
+            ],
         
-            {
-              selector: 'edge',
-              style: {
-                        'curve-style': "bezier",
-                'width': 4,
-                'line-color': '#ccc',
-                'target-arrow-color': '#ccc',
-                'target-arrow-shape': 'triangle'
-              }
-            }
-          ],
-        
-          layout: {
-            name: 'grid',
-            rows: 6,
-            cols: 5
-          }	
-          
-          });       
-          console.log(graph)           
+            layout: {
+                name: 'grid',
+                rows: 6,
+                cols: 5
+            }	          
+        });       
 
+        graph.zoom(1);
+        graph.center();
         //fit layout
         graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
             canvas.style.left = "0px";
