@@ -4142,10 +4142,11 @@ const DiagramComponent = (props: any)=>{
         graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
             canvas.style.left = "0px";
             canvas.style.top = "0px";
-            graph.fit();
+            // graph.fit(); //andt 레이아웃 사용시 주석 해제
         })         
+        //andt 레이아웃 사용시
         graph.on('resize', (event: any)=>{            
-            graph.fit();
+            // graph.fit();
         })
         
         /*         

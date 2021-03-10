@@ -47,19 +47,19 @@ const LayoutComponent = () => {
             </Menu.Item>
           </Menu>
         </Sider>      
-        <Layout className="site-layout">
+        {/* layout 1 : 꿀렁임 없음 여기다 뭐라도 넣을라치면 높이 이런거 다 계산해야 함*/}
+        <div style={{width: "96%", height: "100vh"}}>
+          <DiagramComponent></DiagramComponent>
+        </div>
+        {/* layout 2 : 꿀렁임 있음 대신 레이아웃 구성이 편할지도 */}
+        {/* <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0, backgroundColor: 'gray', height : '6.6vh'}}>
             <Text>Main App bar</Text>
           </Header>
-          <Content style={{ margin: '0 0px', border : "1px solid cyan", height: "93.4vh"}}>        
-            {/* <Row style={{ padding: 0, backgroundColor: 'red', textAlign : "center"}}>
-              <Col span={24}>
-                <Text>Tool Bar</Text>
-              </Col>                
-            </Row>             */}
+          <Content style={{ margin: '0 0px', border : "1px solid cyan", height: "93.4vh"}}>                    
             <DiagramComponent></DiagramComponent>                            
           </Content>          
-        </Layout>
+        </Layout> */}
         
         
       </Layout>
