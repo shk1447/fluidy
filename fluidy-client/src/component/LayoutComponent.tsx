@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {createRef, useEffect, useRef, useState} from 'react';
 import * as antd from 'antd'
 import * as icons from '@ant-design/icons';
 import './LayoutComponent.css';
@@ -17,11 +17,11 @@ const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Text } = Typography;
 const LayoutComponent = () => { 
-  const [collapse, setCollapse] = useState(false)
+  const [collapse, setCollapse] = useState<boolean>(false);;
   const onCollapse = (collapsed: boolean) => {
     setCollapse(collapsed);
   };
-  
+
   return (
       <Layout style={{ minHeight: '100vh' }}> 
       <Sider defaultCollapsed={true} reverseArrow = {true} onCollapse={onCollapse}>
@@ -46,29 +46,21 @@ const LayoutComponent = () => {
               Files
             </Menu.Item>
           </Menu>
-        </Sider>         
+        </Sider>      
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0, backgroundColor: 'gray', height : '6.6vh'}}>
             <Text>Main App bar</Text>
           </Header>
-          <Content style={{ margin: '0 0px', border : "5px solid cyan", height: "93.4vh"}}>        
-            {/* <Row style={{ padding: 0, backgroundColor: 'cyan', textAlign : "center"}}>
+          <Content style={{ margin: '0 0px', border : "1px solid cyan", height: "93.4vh"}}>        
+            {/* <Row style={{ padding: 0, backgroundColor: 'red', textAlign : "center"}}>
               <Col span={24}>
                 <Text>Tool Bar</Text>
               </Col>                
-            </Row>                             */}
-            {/* <div className="site-layout-background" style={{ width: "100%", height : "100%"}}>
-                              
-            </div>               */}
-            {/* <CytoscapeComponent elements={[
-              { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
-              { data: { id: 'two', label: 'Node 2' }, position: { x: 100, y: 0 } },
-              { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
-            ]} style={ { width: '800px', height: '600px' } } />;    
-             */}
-            <DiagramComponent></DiagramComponent>
+            </Row>             */}
+            <DiagramComponent></DiagramComponent>                            
           </Content>          
         </Layout>
+        
         
       </Layout>
     );
