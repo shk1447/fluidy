@@ -1,5 +1,11 @@
 import React, {createRef, forwardRef, useEffect} from 'react';
 import cytoscape from 'cytoscape'
+import contextMenus from 'cytoscape-context-menus';
+import 'cytoscape-context-menus/cytoscape-context-menus.css';
+
+// register extension(context menu)
+cytoscape.use(contextMenus as cytoscape.Ext);
+
 
 const DiagramComponent = (props: any)=>{
     const divRef = createRef<HTMLDivElement>();
@@ -3986,7 +3992,6 @@ const DiagramComponent = (props: any)=>{
               data: { id: 'ab', source: 'a', target: 'b' }
             }
         ]
-        const elements3 = 
         graph = cytoscape({
             container: divRef.current, // container to render in
             elements: elements,        
@@ -4014,7 +4019,24 @@ const DiagramComponent = (props: any)=>{
             name: 'grid',
             rows: 1
             }
-        });     
+        }).on('cxttap', function(event) {
+            if (allSelected('node')) {
+              contextMenu.hideMenuItem('select-all-nodes');
+              contextMenu.showMenuItem('unselect-all-nodes');
+            }
+            else {
+              contextMenu.hideMenuItem('unselect-all-nodes');
+              contextMenu.showMenuItem('select-all-nodes');
+            }
+            if (allSelected('edge')) {
+              contextMenu.hideMenuItem('select-all-edges');
+              contextMenu.showMenuItem('unselect-all-edges');
+            }
+            else {
+              contextMenu.hideMenuItem('unselect-all-edges');
+              contextMenu.showMenuItem('select-all-edges');
+            }
+          });     
         graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
             canvas.style.left = "0px";
             canvas.style.top = "0px";
@@ -4022,6 +4044,194 @@ const DiagramComponent = (props: any)=>{
         graph.on('resize', (event: any)=>{            
             graph.fit();
         })
+        const allSelected = function (type: any) {
+            if (type == 'node') {
+              return graph.nodes().length == graph.nodes(':selected').length;
+            }
+            else if (type == 'edge') {
+              return graph.edges().length == graph.edges(':selected').length;
+            }
+            return false;
+          }
+  
+          const selectAllOfTheSameType = function (type: any) {
+            if (type == 'node') {
+                graph.nodes().select();
+            } else if (type == 'edge') {
+                graph.edges().select();
+            }
+          };
+          const unselectAllOfTheSameType = function (type: any) {
+            if (type == 'node') {
+                graph.nodes().unselect();
+              ;
+            } else if (type == 'edge') {
+                graph.edges().unselect();
+            }
+          };
+        const contextMenu = graph.contextMenus({
+            menuItems: [
+              {
+                id: 'remove',
+                content: 'remove',
+                tooltipText: 'remove',
+                image: {src: "assets/remove.svg", width: 12, height: 12, x: 6, y: 4},
+                selector: 'node, edge',
+                onClickFunction: function (event: any) {
+                  var target = event.target || event.cyTarget;
+                //   removed = target.remove();
+  
+                  contextMenu.showMenuItem('undo-last-remove');
+                },
+                hasTrailingDivider: true
+              },
+              {
+                id: 'undo-last-remove',
+                content: 'undo last remove',
+                selector: 'node, edge',
+                show: false,
+                coreAsWell: true,
+                onClickFunction: function (event: any) {
+                //   if (removed) {
+                //     removed.restore();
+                //   }
+                  contextMenu.hideMenuItem('undo-last-remove');
+                },
+                hasTrailingDivider: true
+              },
+              {
+                id: 'color',
+                content: 'change color',
+                tooltipText: 'change color',
+                selector: 'node',
+                hasTrailingDivider: true,
+                submenu: [
+                  {
+                    id: 'color-blue',
+                    content: 'blue',
+                    tooltipText: 'blue',
+                    onClickFunction: function (event: any) {
+                      let target = event.target || event.cyTarget;
+                      target.style('background-color', 'blue');
+                    },
+                    submenu: [
+                      {
+                        id: 'color-light-blue',
+                        content: 'light blue',
+                        tooltipText: 'light blue',
+                        onClickFunction: function (event: any) {
+                          let target = event.target || event.cyTarget;
+                          target.style('background-color', 'lightblue');
+                        },
+                      },
+                      {
+                        id: 'color-dark-blue',
+                        content: 'dark blue',
+                        tooltipText: 'dark blue',
+                        onClickFunction: function (event: any) {
+                          let target = event.target || event.cyTarget;
+                          target.style('background-color', 'darkblue');
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    id: 'color-green',
+                    content: 'green',
+                    tooltipText: 'green',
+                    onClickFunction: function (event: any) {
+                      let target = event.target || event.cyTarget;
+                      target.style('background-color', 'green');
+                    },
+                  },
+                  {
+                    id: 'color-red',
+                    content: 'red',
+                    tooltipText: 'red',
+                    onClickFunction: function (event: any) {
+                      let target = event.target || event.cyTarget;
+                      target.style('background-color', 'red');
+                    },
+                  },
+                ]
+              },
+              {
+                id: 'add-node',
+                content: 'add node',
+                tooltipText: 'add node',
+                image: {src: "assets/add.svg", width: 12, height: 12, x: 6, y: 4},
+                coreAsWell: true,
+                onClickFunction: function (event: any) {
+                  var data = {
+                    group: 'nodes'
+                  };
+  
+                  var pos = event.position || event.cyPosition;
+  
+                  graph.add({
+                    data: data,
+                    position: {
+                      x: pos.x,
+                      y: pos.y
+                    }
+                  });
+                }
+              },
+              {
+                id: 'select-all-nodes',
+                content: 'select all nodes',
+                selector: 'node',
+                coreAsWell: true,
+                show: true,
+                onClickFunction: function (event: any) {
+                  selectAllOfTheSameType('node');
+  
+                  contextMenu.hideMenuItem('select-all-nodes');
+                  contextMenu.showMenuItem('unselect-all-nodes');
+                }
+              },
+              {
+                id: 'unselect-all-nodes',
+                content: 'unselect all nodes',
+                selector: 'node',
+                coreAsWell: true,
+                show: false,
+                onClickFunction: function (event: any) {
+                  unselectAllOfTheSameType('node');
+  
+                  contextMenu.showMenuItem('select-all-nodes');
+                  contextMenu.hideMenuItem('unselect-all-nodes');
+                }
+              },
+              {
+                id: 'select-all-edges',
+                content: 'select all edges',
+                selector: 'edge',
+                coreAsWell: true,
+                show: true,
+                onClickFunction: function (event: any) {
+                  selectAllOfTheSameType('edge');
+  
+                  contextMenu.hideMenuItem('select-all-edges');
+                  contextMenu.showMenuItem('unselect-all-edges');
+                }
+              },
+              {
+                id: 'unselect-all-edges',
+                content: 'unselect all edges',
+                selector: 'edge',
+                coreAsWell: true,
+                show: false,
+                onClickFunction: function (event: any) {
+                  unselectAllOfTheSameType('edge');
+  
+                  contextMenu.showMenuItem('select-all-edges');
+                  contextMenu.hideMenuItem('unselect-all-edges');
+                }
+              }
+            ]
+          });
+
         return ()=> graph.destroy();
     }, []);
 
