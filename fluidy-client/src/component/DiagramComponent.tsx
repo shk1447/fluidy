@@ -4087,7 +4087,7 @@ const DiagramComponent = (props: any)=>{
         ]
         graph = cytoscape({
             container: divRef.current, // container to render in
-            elements: elements3,        
+            elements: elements2,        
             style: [ // the stylesheet for the graph
                 {
                     selector: 'node',

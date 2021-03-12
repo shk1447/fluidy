@@ -38,7 +38,7 @@ section {
 .el-header, .el-footer {
   background-color: #B3C0D1;
   color: #333;
-  text-align: center;
+  /* text-align: center; */
   line-height: 60px;
 }
 .el-header {
@@ -97,7 +97,12 @@ aside {
 .el-footer, .el-main {
   -webkit-box-sizing: border-box;
 }
-user agent stylesheet
+
 main {
   display: block;
+}
+
+.ant-tabs-content{
+  width: 100%;
+  height: 100%;
 }

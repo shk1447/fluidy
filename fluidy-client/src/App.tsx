@@ -5,6 +5,9 @@ import LayoutComponent from './component/LayoutComponent';
 import * as antd from 'antd'
 import * as icons from '@ant-design/icons';
 import DiagramComponent from './component/DiagramComponent';
+import { Radio, Tabs } from 'antd';
+const { TabPane } = Tabs;
+
 const {Layout, Menu, Typography, Row, Col} = antd;
 const { 
   DesktopOutlined,
@@ -50,13 +53,17 @@ function App() {
             </SubMenu>
           </Menu>
           </aside>
-          <section className="el-container is-vertical">
-            <header className ="el-header" style={{height: "60px", backgroundColor:"cyan"}}>
-              Tool bar
-            </header>
+          <section className="el-container is-vertical">            
+            <header className ="el-header" style={{height: "60px", backgroundColor:"orange"}}>              
+              <Radio.Group defaultValue="a" size="large">
+                <Radio.Button value="a">Flow Chart</Radio.Button>
+                <Radio.Button value="b">Document</Radio.Button>                
+              </Radio.Group>
+            </header>             
             <main className="el-main">
               <DiagramComponent></DiagramComponent>
-            </main>
+            </main> 
+                       
           </section>
           <aside className="el-aside" style={{width: "300px"}}>
             Aside
