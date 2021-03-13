@@ -1,7 +1,7 @@
 import { Radio } from 'antd';
 import { Route, RouteComponentProps, Link, Switch, useRouteMatch  } from 'react-router-dom';
-import FlowChartDocument from '../FlowChartDocument/FlowChartDocument';
-import FlowChartComponent from '../FlowChart/FlowChartComponent';
+import FlowChartDocument from './FlowChartDocument/FlowChartDocument';
+import FlowChartComponent from './FlowChart/FlowChartComponent';
 
 const FlowComponent = () =>{
     let { path, url } = useRouteMatch();

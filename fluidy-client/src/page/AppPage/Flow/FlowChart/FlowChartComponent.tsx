@@ -1,4 +1,4 @@
-import DiagramComponent from '../../component/Diagram/DiagramComponent';
+import DiagramComponent from '../../../../component/Diagram/DiagramComponent';
 
 const FlowChartComponent = () =>{    
     console.log("뿅")
