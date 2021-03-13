@@ -4139,16 +4139,16 @@ const DiagramComponent = (props: any)=>{
         * | 시간이 녹록치 않아 일단 이렇게 해놓는다. |
         * -----------------------
         */
-        graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
-            canvas.style.left = "0px";
-            canvas.style.top = "0px";
-            // graph.fit(); //andt 레이아웃 사용시 주석 해제
-        })         
-        //andt 레이아웃 사용시
-        graph.on('resize', (event: any)=>{            
-            // graph.fit();
-        })
-        
+        // graph.renderer().data.canvases.forEach((canvas: HTMLCanvasElement)=> {
+        //     // canvas.style.left = "0px";
+        //     // canvas.style.top = "0px";
+        //     // graph.fit(); //andt 레이아웃 사용시 주석 해제
+        // })         
+        // //andt 레이아웃 사용시
+        // graph.on('resize', (event: any)=>{            
+        //     // graph.fit();
+        // })
+        graph.fit();
         /*         
         * -----------------------
         * | context menu sample |
