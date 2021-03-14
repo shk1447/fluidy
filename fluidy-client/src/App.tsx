@@ -1,9 +1,16 @@
-import { Route, Link, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Link, Switch, useRouteMatch, useHistory } from 'react-router-dom';
 import AppPageComponent from './page/AppPage/AppPageComponent';
 import LoginComponent from './page/LoginPage/Login/LoginConponent'
+import './App.css'
+import { useEffect, useCallback } from 'react';
 function App() {
   let { path, url } = useRouteMatch();
-    console.log(path);
+  const history = useHistory();
+  const handleOnClick = useCallback(() => history.push('/App/Flow/FlowChart'), [history]);
+
+  useEffect(()=>{    
+    if(path === "/") handleOnClick();
+  }, [path])
   return (
     <div className="App">      
       <Switch>
