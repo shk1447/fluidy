@@ -1,0 +1,37 @@
+{
+    "root_path": "./",
+    "host": "0.0.0.0",
+    "port": 8081,
+    "session_time": 240,
+    "database": {
+        "type": "sqlite3",
+        "pg": {
+            "host": "127.0.0.1",
+            "user": "root",
+            "password": "root",
+            "database": "root"
+        },
+        "mysql": {
+            "host": "127.0.0.1",
+            "user": "root",
+            "password": "root",
+            "database": "root"
+        },
+        "sqlite3": {
+            "filename": "./fluidy.db"
+        }
+    },
+    "google_auth": {
+        "id": "79140157639-4da7m7jmngfoobusqvahaesvckm18u53.apps.googleusercontent.com",
+        "secret": "vbyPznKeEasMJJlqgZqRhTay",
+        "domain": "http://localhost:8080"
+    },
+    "smtp" : {
+        "service":"gmail",
+        "host": "smtp.gmail.com",
+        "auth": {
+            "user": "",
+            "pass": ""
+        }
+    }
+}
